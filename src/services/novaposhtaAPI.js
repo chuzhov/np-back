@@ -24,23 +24,42 @@ const getPackageData = async (trackingNumber, phoneNumber) => {
     if (!success) {
       return { success: false, warnings, errors };
     } else {
-      const response = {
-        Status: data.data[0].Status,
-        StatusCode: data.data[0].StatusCode,
-        ActualDeliveryDate: data.data[0].ActualDeliveryDate,
-        DateCreated: data.data[0].DateCreated,
-        WarehouseSender: data.data[0].WarehouseSender,
-        WarehouseRecipient: data.data[0].WarehouseRecipient,
-        PaymentStatus: data.data[0].PaymentStatus,
-        //if phonenumber is correct
-        CargoDescriptionString: data?.data[0]?.CargoDescriptionString ?? '',
-        CityRecepient: data?.data[0]?.CityRecipient ?? '',
-        RecipientFullName: data?.data[0]?.RecipientFullName ?? '',
-        DocumentCost: data?.data[0]?.DocumentCost ?? '',
-        VolumeWeight: data?.data[0]?.VolumeWeight ?? '',
-        ScheduledDeliveryDate: data?.data[0]?.ScheduledDeliveryDate ?? '',
+      const firstItem = data?.data?.[0] ?? {};
+      const {
+        Status,
+        StatusCode,
+        ActualDeliveryDate,
+        DateCreated,
+        WarehouseSender,
+        WarehouseRecipient,
+        PaymentStatus,
+        CargoDescriptionString = '',
+        CityRecipient = '',
+        RecipientFullName = '',
+        DocumentCost = '',
+        VolumeWeight = '',
+        ScheduledDeliveryDate = '',
+      } = firstItem;
+
+      return {
+        success: true,
+        warnings,
+        data: {
+          Status,
+          StatusCode,
+          ActualDeliveryDate,
+          DateCreated,
+          WarehouseSender,
+          WarehouseRecipient,
+          PaymentStatus,
+          CargoDescriptionString,
+          CityRecipient,
+          RecipientFullName,
+          DocumentCost,
+          VolumeWeight,
+          ScheduledDeliveryDate,
+        },
       };
-      return { success: true, warnings, data: response };
     }
   } catch (error) {
     throw error;
