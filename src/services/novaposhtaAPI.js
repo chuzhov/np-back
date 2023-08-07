@@ -24,40 +24,30 @@ const getPackageData = async (trackingNumber, phoneNumber) => {
     if (!success) {
       return { success: false, warnings, errors };
     } else {
-      const firstItem = data?.data?.[0] ?? {};
-      const {
-        Status,
-        StatusCode,
-        ActualDeliveryDate,
-        DateCreated,
-        WarehouseSender,
-        WarehouseRecipient,
-        PaymentStatus,
-        CargoDescriptionString = '',
-        CityRecipient = '',
-        RecipientFullName = '',
-        DocumentCost = '',
-        VolumeWeight = '',
-        ScheduledDeliveryDate = '',
-      } = firstItem;
-
       return {
         success: true,
         warnings,
         data: {
-          Status,
-          StatusCode,
-          ActualDeliveryDate,
-          DateCreated,
-          WarehouseSender,
-          WarehouseRecipient,
-          PaymentStatus,
-          CargoDescriptionString,
-          CityRecipient,
-          RecipientFullName,
-          DocumentCost,
-          VolumeWeight,
-          ScheduledDeliveryDate,
+          status: data.data[0].Status,
+          status_code: data.data[0].StatusCode,
+          actual_delivery_date: data.data[0].ActualDeliveryDate,
+          date_created: data.data[0].DateCreated,
+          warehouse_sender: data.data[0].WarehouseSender,
+          warehouse_recipient: data.data[0].WarehouseRecipient,
+          payment_status: data.data[0].PaymentStatus,
+          cargo_description_string: data.data[0]?.CargoDescriptionString
+            ? data.data[0]?.CargoDescriptionString
+            : '',
+          city_recipient: data.data[0].CityRecipient,
+          recipient_full_name: data.data[0]?.RecipientFullName
+            ? data.data[0]?.RecipientFullName
+            : '',
+          sender_full_name: data.data[0]?.SenderFullNameEW
+            ? data.data[0]?.SenderFullNameEW
+            : '',
+          document_cost: data.data[0].DocumentCost,
+          volume_weight: data.data[0].VolumeWeight,
+          scheduled_delivery_date: data.data[0].ScheduledDeliveryDate,
         },
       };
     }
