@@ -7,6 +7,24 @@ const pool = new Pool({
   connectionString: DB_CONNECTION_STRING,
 });
 
+async function addRowToTable(tableName, data) {
+  const keysString = Object.keys(data).join(', ');
+  const valuesArray = Object.values(data);
+
+  const insertQuery = `
+      INSERT INTO ${tableName} (${keysString})
+      VALUES (${valuesArray.map((_, index) => `$${index + 1}`).join(', ')})
+    `;
+
+  try {
+    const result = await pool.query(insertQuery, valuesArray);
+    console.log('Record inserted successfully:', result.rowCount);
+    return { error: '', result };
+  } catch (error) {
+    return { error: error.code, result: '' };
+  }
+}
+
 // Example query function
 async function getRowsFromTable(tableName) {
   try {
@@ -20,5 +38,6 @@ async function getRowsFromTable(tableName) {
 }
 
 module.exports = {
+  addRowToTable,
   getRowsFromTable,
 };
