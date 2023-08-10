@@ -44,6 +44,7 @@ const getPackageData = async (trackingNumber, phoneNumber) => {
             ? data.data[0]?.CargoDescriptionString
             : '',
           city_recipient: data.data[0].CityRecipient,
+          city_sender: data.data[0].CitySender,
           recipient_full_name: data.data[0]?.RecipientFullName
             ? data.data[0]?.RecipientFullName
             : '',
