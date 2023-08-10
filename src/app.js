@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ success: true, message: 'Server is running' });
+  res.status(200).json({ success: true, message: 'OK' });
 });
 app.use('/api/1.0/packages', packagesRouter);
 
