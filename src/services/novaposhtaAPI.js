@@ -21,7 +21,12 @@ const getPackageData = async (trackingNumber, phoneNumber) => {
   try {
     const { data } = await axios.post(BASE_URL, options);
     const { success, warnings, errors } = data;
-    if (!success) {
+
+    if (
+      !success ||
+      data.data[0].StatusCode == 3 ||
+      data.data[0].Status === 'Номер не найден'
+    ) {
       return { success: false, warnings, errors };
     } else {
       return {

@@ -27,26 +27,6 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
 
-// catching mongoose cast error
-app.use((err, req, res, next) => {
-  if (err.name === 'CastError') {
-    return res.status(404).send(err.message);
-  }
-  next(err);
-});
-
-// catching mongoose validation error
-app.use((err, req, res, next) => {
-  if (err.name === 'ValidationError') {
-    let errors = {};
-    Object.keys(err.errors).forEach(key => {
-      errors[key] = err.errors[key].message;
-    });
-    return res.status(400).send(errors);
-  }
-  next(err);
-});
-
 app.use((err, req, res, next) => {
   console.log(err);
   const { status = 500, message = 'Server error' } = err;
