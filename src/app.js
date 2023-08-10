@@ -6,8 +6,6 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 
 const packagesRouter = require('./routes/');
-// const mainRouter = require('./routes/api/mainPage');
-// const tenderListRouter = require('./routes/api/tenderList');
 
 const app = express();
 
