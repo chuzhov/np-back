@@ -24,16 +24,25 @@ const addPackage = async (req, res) => {
     data._status = '';
     const { error, id } = await addRowToTable('packages_data', data);
     if (!error) {
-      res.status(201).json({ success: true, warnings, id });
+      data.id = id;
+      res.status(201).json({ success: true, warnings, data, error });
     }
     if (error === '23505') {
-      res
-        .status(409)
-        .json({ success: false, warnings, error: 'Duplicate package number' });
+      res.status(409).json({
+        success: false,
+        warnings: [],
+        data: {},
+        error: 'Duplicate package number',
+      });
     }
   } catch (error) {
     console.error('Error adding package:', error);
-    res.status(500).json({ success: false, error: 'Failed to add package' });
+    res.status(500).json({
+      success: false,
+      warnings: [],
+      data: {},
+      error: 'Failed to add package',
+    });
   }
 };
 
