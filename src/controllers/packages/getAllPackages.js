@@ -1,4 +1,4 @@
-const { getRowsFromTable } = require('../../../db/dbUtils');
+const { getRowsFromTable } = require('../../db/dbUtils');
 
 const getAllPackages = async (req, res) => {
   const { error, rows, hits } = await getRowsFromTable('packages_data');

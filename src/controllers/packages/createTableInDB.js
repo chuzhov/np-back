@@ -1,4 +1,4 @@
-const { createPackageDataTable } = require('../../../db/dbUtils');
+const { createPackageDataTable } = require('../../db/dbUtils');
 
 const createTableInDB = async (req, res) => {
   const { error } = createPackageDataTable('packages_data');

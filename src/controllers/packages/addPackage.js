@@ -1,4 +1,4 @@
-const { addRowToTable } = require('../../../db/dbUtils');
+const { addRowToTable } = require('../../db/dbUtils');
 
 //const io = require('../../socket');
 
