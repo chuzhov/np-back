@@ -92,6 +92,7 @@ async function deleteRecordFromTable(tableName, idToDelete) {
 }
 
 module.exports = {
+  pool,
   addRowToTable,
   createPackageDataTable,
   deleteRecordFromTable,

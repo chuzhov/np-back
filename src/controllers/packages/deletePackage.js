@@ -1,4 +1,4 @@
-const { deleteRecordFromTable } = require('../../../db/dbUtils');
+const { deleteRecordFromTable } = require('../../db/dbUtils');
 
 const deletePackage = async (req, res) => {
   const idToDelete = req.params.id;
