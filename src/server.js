@@ -1,9 +1,12 @@
 const app = require('./app');
+const { handleSigterm } = require('./signalHandler');
 
 const { PORT = 4000 } = process.env;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports = app;
+// Handle SIGTERM signal
+handleSigterm(server);
+module.exports = server;
